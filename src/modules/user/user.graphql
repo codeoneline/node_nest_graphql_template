@@ -1,0 +1,23 @@
+type User {
+  userKey: ID!
+  firstNme: String
+  lastNme: String
+  email: String!
+  createdDte: Date!
+}
+
+type Auth {
+  email: String!
+  token: String!
+}
+
+type Query {
+  users(page: Int): [User!]
+  user(email: String!): User
+  whoami: User
+}
+
+type Mutation {
+  login(email: String!, password: String!): Auth
+  register(email: String!, password: String!, firstNme: String, lastNme: String): Auth
+}
