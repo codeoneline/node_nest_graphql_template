@@ -7,6 +7,7 @@ import {
 } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../../shared/auth.gaurd';
+import { User } from '../../shared/entities';
 import { UserService } from '../../shared/services/user.service';
 import { UserDTO } from '../../shared/dtos/user.dto';
 
@@ -18,19 +19,23 @@ export class UserResolver {
 
   @Query()
   async users(@Args('page') page: number) {
-    return await this.userService.showAll(page);
+    const users = await User.find({
+      take: 25,
+      skip: 25 * (page - 1),
+    });
+    return users.map(user => user.toResponseObject(false));
   }
 
   @Query()
   async user(@Args('email') email: string) {
-    return await this.userService.read(email);
+    return User.findOne({email});
   }
 
   @Query()
   @UseGuards(new AuthGuard())
   async whoami(@Context('user') user) {
     const { email } = user;
-    return await this.userService.read(email);
+    return User.findOne({email});
   }
 
   @Mutation()

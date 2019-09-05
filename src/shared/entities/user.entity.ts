@@ -5,13 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
+  BaseEntity,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { UserRO } from '../dtos/user.dto';
 
 @Entity('User')
-export class UserEntity {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   userKey: number;
 
