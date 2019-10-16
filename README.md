@@ -20,15 +20,6 @@ DATABASE_PASSWORD=postgres
 DATABASE_NAME=template
 ```
 
-remote DEV .env
-```
-PORT=3000
-SECRET=elleon
-DATABASE_HOST=35.232.136.117
-DATABASE_USERNAME=postgres
-DATABASE_PASSWORD=postgres
-DATABASE_NAME=dev
-```
 # Database setup
 #### Local Database
 
